@@ -13,9 +13,9 @@ export default (state = initialState, action) => {
   console.log("REDUCER", state, action);
   switch (action.type) {
     case INCREMENT:
-      return { ...state, count: state.count + 1 };
+      return { count: state.count + 1 };
     case DECREMENT:
-      return { ...state, count: state.count - 1 };
+      return { count: state.count - 1 };
     default:
       return state;
   }
