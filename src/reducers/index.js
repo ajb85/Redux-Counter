@@ -1,7 +1,8 @@
-import { INCREMENT, DECREMENT } from "../actions";
+import { INCREMENT, DECREMENT, INC_IF_ODD } from "../actions";
 
 const initialState = {
-  count: 0
+  displayCount: 0,
+  trueCount: 0
 };
 
 // Our reducer that handles our two action cases:
@@ -10,12 +11,34 @@ const initialState = {
 // by our action creator. What does the reducer
 // need to do with the count in each case?
 export default (state = initialState, action) => {
-  console.log("REDUCER", state, action);
   switch (action.type) {
     case INCREMENT:
-      return { count: state.count + 1 };
+      return {
+        ...state,
+        displayCount: state.displayCount + 1,
+        trueCount: state.trueCount + 1
+      };
     case DECREMENT:
-      return { count: state.count - 1 };
+      return {
+        ...state,
+        displayCount: state.displayCount - 1,
+        trueCount: state.trueCount + 1
+      };
+
+    case INC_IF_ODD:
+      const newValue = state.trueCount + 1;
+      if (state.trueCount % 2 === 0) {
+        return {
+          ...state,
+          displayCount: newValue,
+          trueCount: newValue
+        };
+      } else {
+        return {
+          ...state,
+          trueCount: state.trueCount + 1
+        };
+      }
     default:
       return state;
   }

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { increment, decrement } from "../actions";
+import { increment, decrement, inc_if_odd } from "../actions";
 
 class Counter extends Component {
   incrementIfOdd = () => {
@@ -19,7 +19,7 @@ class Counter extends Component {
     // should decrement or increment accordingly
     return (
       <p>
-        Clicked: {this.props.count} times
+        Clicked: {this.props.displayCount} times
         <button
           onClick={() => {
             this.props.increment();
@@ -36,12 +36,8 @@ class Counter extends Component {
         </button>
         {/* Uncomment these button tags if you got
                 around to implementing the extra credit functions */}
-        {/* <button onClick={this.incrementIfOdd}>
-                    Increment if odd
-                </button>
-                <button onClick={this.incrementAsync}>
-                    Increment async
-                </button>  */}
+        <button onClick={this.props.inc_if_odd}>Increment if odd</button>
+        <button onClick={this.incrementAsync}>Increment async</button>
       </p>
     );
   }
@@ -55,7 +51,7 @@ class Counter extends Component {
 // parts it needs from the state object.
 const mapStateToProps = state => {
   return {
-    count: state.count
+    displayCount: state.displayCount
   };
 };
 
@@ -66,5 +62,5 @@ const mapStateToProps = state => {
 // makes itself known to this component.
 export default connect(
   mapStateToProps,
-  { increment, decrement }
+  { increment, decrement, inc_if_odd }
 )(Counter);
